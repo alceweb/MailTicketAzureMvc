@@ -1,0 +1,86 @@
+﻿@model MailTicketAzureMvc.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details.</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CodiceFiscale)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CodiceFiscale)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PartitaIva)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PartitaIva)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Insegna)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Insegna)
+        </dd>
+    </dl>
+</div>
+<h4>Ruoli di appartenenza</h4>
+@Html.Display(User.Identity.Name.ToString())
+@if (ViewBag.RoleNames.Count == 0)
+{
+    <hr />
+    <p>Nessun ruolo assegnato a questo utente</p>
+}
+
+<table class="table">
+
+    @foreach (var item in ViewBag.RoleNames)
+    {
+        <tr>
+            <td>
+                @item
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Modifica", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Torna alla lista", "Index")
+</p>
+
+
+
