@@ -1,17 +1,54 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
-<h2>@ViewBag.Title.</h2>
+﻿<h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
+<div class="row">
+    <div class="col col-sm-3">
+        <address>
+            PMGR<br />
+            Viale Forlanini, Milano<br />
+            <abbr title="Telefono">Tel:</abbr>
+            02.555555
+        </address>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+    </div>
+    <div class="col col-sm-8">
+        <address>
+            <strong>Assistenza:</strong>   <a href="mailto:Support@example.com">support@mailticket.it</a><br/>
+            <strong>Commerciale:</strong> <a href="mailto:Marketing@example.com">commerciale@mailticket.it</a><br/>
+            <strong>Contabilita:</strong> <a href="mailto:Marketing@example.com">contab@mailticket.it</a>
+        </address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    </div>
+</div>
+
+<hr/>
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="InputNome">Nome</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="InputNome" placeholder="Nome e Cognome">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="InputPV">Punto vendita</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="InputPV" placeholder="Nominativo punto vendita">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="InputEmail">Email</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="InputEmail" placeholder="La tua mail">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="InputMessaggio">Messaggio</label>
+        <div class="col-sm-10">
+            <textarea id="InputMessaggio" class="form-control" rows="2" cols="20" placeholder="Inserisci la richiesta"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Invia la richiesta</button>
+        </div>
+    </div>
+</form>
