@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://wsfiscale.mailticket.it/servizioprevendita.asmx?wsdl" docRef="https://wsfiscale.mailticket.it/servizioprevendita.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://wsfiscale.mailticket.it/servizioprevendita.asmx" xmlns:q1="http://wsfiscale.mailticket.it/" binding="q1:ServizioPrevenditaSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://wsfiscale.mailticket.it/servizioprevendita.asmx" xmlns:q2="http://wsfiscale.mailticket.it/" binding="q2:ServizioPrevenditaSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

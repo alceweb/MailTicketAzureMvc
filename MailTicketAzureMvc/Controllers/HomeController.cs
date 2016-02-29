@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MailTicketAzureMvc.ServizioPrevendita;
+using Microsoft.AspNet.Identity;
 
 namespace MailTicketAzureMvc.Controllers
 {
@@ -16,6 +18,8 @@ namespace MailTicketAzureMvc.Controllers
                 ViewBag.Title = "Home amministratore";
                 ViewBag.Message = "Gestisci i punti vendita";
             }
+            var service = new ServizioPrevendita.ServizioPrevendita();
+            ViewBag.Service = service.RecuperaEventiMailticket().Length;
             return View();
         }
 

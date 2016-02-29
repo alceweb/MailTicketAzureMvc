@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://wsfiscale.mailticket.it/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://wsfiscale.mailticket.it/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://wsfiscale.mailticket.it/">
+      <s:element name="VerificaCodicePR">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CodePR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IdMan" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IdEvento" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Tipologia" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CtSa" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerificaCodicePRResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerificaCodicePRResult" type="tns:RispPrevendita" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RispPrevendita">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Esito" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Messaggio" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AggiungiAlCarrello">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdOrdine" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IdUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TipoUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id_man" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ctsa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idEvMail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="codicePr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CodiceCat" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="idPosto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BSID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AggiungiAlCarrelloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AggiungiAlCarrelloResult" type="tns:RispAggCarrello" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RispAggCarrello">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Esito" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Messaggio" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroOrdine" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotaleNetto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotaleCommissioni" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotaleOrdine" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalePrezzoOrdine" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalePrevendita" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumeroRiga" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RimuoviDalCarrello">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TipoUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumOrdine" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IdRiga" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RimuoviDalCarrelloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RimuoviDalCarrelloResult" type="tns:RispPrevendita" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminaCarrello">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TipoUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumOrdine" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DataAnnullamento" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminaCarrelloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EliminaCarrelloResult" type="tns:RispPrevendita" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfermaCarrello">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TipoUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumOrdine" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfermaCarrelloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfermaCarrelloResult" type="tns:RispPrevendita" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AggiornaOrdine">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TipoUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumOrdine" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dsOrdine" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailInvio" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fatturazione" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="datiFattura" type="tns:DatiFattOrdine" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DatiFattOrdine">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItaliaEstero" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Azienda" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="RagioneSociale" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Congome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PICF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Indirizzo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CAP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Localita" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Provincia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AggiornaOrdineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AggiornaOrdineResult" type="tns:RispPrevendita" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistraAnagint">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TipoUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumOrdine" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IdRiga" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Cognome" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Privacy" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="IdSuppDig" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RegistraAnagintResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegistraAnagintResult" type="tns:RispPrevendita" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RiepilogoOrdine">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TipoUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumOrdine" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RiepilogoOrdineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RiepilogoOrdineResult" type="tns:RispostaRiepilogo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RispostaRiepilogo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Esito" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Messaggio" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrdineChiuso" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrdinePagato" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrdineEvaso" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrdineInvioEmail" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotaleNetto" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotaleCommisioni" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotaleOrdine" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrdineDatiFatt" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessStatoOrdine" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UrlCodiceUnico" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ElencoArt" type="tns:ArrayOfArticoliCarrello" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfArticoliCarrello">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArticoliCarrello" nillable="true" type="tns:ArticoliCarrello" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArticoliCarrello">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdManCtSa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IdRow" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RigaStornata" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescrTipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descrizione" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescrVal" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Corrispettivo" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="PathPDF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Codeunico" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AvviaPagamentoOrdine">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TipoUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumOrdine" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AvviaPagamentoOrdineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AvviaPagamentoOrdineResult" type="tns:RispostaAvviaPag" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RispostaAvviaPag">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Esito" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Messaggio" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="evasioneFatta" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="GoPagamento" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="GoCalcCarrello" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RicalcolaCarrello">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TipoUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NumOrdine" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RicalcolaCarrelloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RicalcolaCarrelloResult" type="tns:RispPrevendita" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ElencoOrdini">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TipoUtente" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ElencoOrdiniResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ElencoOrdiniResult" type="tns:RispPrevendita" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecuperaEventiMailticket">
+        <s:complexType />
+      </s:element>
+      <s:element name="RecuperaEventiMailticketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RecuperaEventiMailticketResult" type="tns:ArrayOfEventoMail" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEventoMail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EventoMail" nillable="true" type="tns:EventoMail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EventoMail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="idSpettacolo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idSpettMail" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idEvento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idMan" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescEvento" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Dataevento" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LinkImmagine" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Spettacolo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RecuperaBigliettiManEinet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DscMan" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OrdinePosto" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecuperaBigliettiManEinetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RecuperaBigliettiManEinetResult" type="tns:ArrayOfTitoli" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTitoli">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Titoli" nillable="true" type="tns:Titoli" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Titoli">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IdTitolo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BigliettoAbbonamento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ordine_posto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descrizione" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PrezzoTitolo" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipologiaBiglietto" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IvaPreassolta" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Servizio" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Progressivo" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Prevendita" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RecuperaBigliettiManMinet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DscMan" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecuperaBigliettiManMinetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RecuperaBigliettiManMinetResult" type="tns:ArrayOfTitoli" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="VerificaCodicePRSoapIn">
+    <wsdl:part name="parameters" element="tns:VerificaCodicePR" />
+  </wsdl:message>
+  <wsdl:message name="VerificaCodicePRSoapOut">
+    <wsdl:part name="parameters" element="tns:VerificaCodicePRResponse" />
+  </wsdl:message>
+  <wsdl:message name="AggiungiAlCarrelloSoapIn">
+    <wsdl:part name="parameters" element="tns:AggiungiAlCarrello" />
+  </wsdl:message>
+  <wsdl:message name="AggiungiAlCarrelloSoapOut">
+    <wsdl:part name="parameters" element="tns:AggiungiAlCarrelloResponse" />
+  </wsdl:message>
+  <wsdl:message name="RimuoviDalCarrelloSoapIn">
+    <wsdl:part name="parameters" element="tns:RimuoviDalCarrello" />
+  </wsdl:message>
+  <wsdl:message name="RimuoviDalCarrelloSoapOut">
+    <wsdl:part name="parameters" element="tns:RimuoviDalCarrelloResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminaCarrelloSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminaCarrello" />
+  </wsdl:message>
+  <wsdl:message name="EliminaCarrelloSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminaCarrelloResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfermaCarrelloSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfermaCarrello" />
+  </wsdl:message>
+  <wsdl:message name="ConfermaCarrelloSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfermaCarrelloResponse" />
+  </wsdl:message>
+  <wsdl:message name="AggiornaOrdineSoapIn">
+    <wsdl:part name="parameters" element="tns:AggiornaOrdine" />
+  </wsdl:message>
+  <wsdl:message name="AggiornaOrdineSoapOut">
+    <wsdl:part name="parameters" element="tns:AggiornaOrdineResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegistraAnagintSoapIn">
+    <wsdl:part name="parameters" element="tns:RegistraAnagint" />
+  </wsdl:message>
+  <wsdl:message name="RegistraAnagintSoapOut">
+    <wsdl:part name="parameters" element="tns:RegistraAnagintResponse" />
+  </wsdl:message>
+  <wsdl:message name="RiepilogoOrdineSoapIn">
+    <wsdl:part name="parameters" element="tns:RiepilogoOrdine" />
+  </wsdl:message>
+  <wsdl:message name="RiepilogoOrdineSoapOut">
+    <wsdl:part name="parameters" element="tns:RiepilogoOrdineResponse" />
+  </wsdl:message>
+  <wsdl:message name="AvviaPagamentoOrdineSoapIn">
+    <wsdl:part name="parameters" element="tns:AvviaPagamentoOrdine" />
+  </wsdl:message>
+  <wsdl:message name="AvviaPagamentoOrdineSoapOut">
+    <wsdl:part name="parameters" element="tns:AvviaPagamentoOrdineResponse" />
+  </wsdl:message>
+  <wsdl:message name="RicalcolaCarrelloSoapIn">
+    <wsdl:part name="parameters" element="tns:RicalcolaCarrello" />
+  </wsdl:message>
+  <wsdl:message name="RicalcolaCarrelloSoapOut">
+    <wsdl:part name="parameters" element="tns:RicalcolaCarrelloResponse" />
+  </wsdl:message>
+  <wsdl:message name="ElencoOrdiniSoapIn">
+    <wsdl:part name="parameters" element="tns:ElencoOrdini" />
+  </wsdl:message>
+  <wsdl:message name="ElencoOrdiniSoapOut">
+    <wsdl:part name="parameters" element="tns:ElencoOrdiniResponse" />
+  </wsdl:message>
+  <wsdl:message name="RecuperaEventiMailticketSoapIn">
+    <wsdl:part name="parameters" element="tns:RecuperaEventiMailticket" />
+  </wsdl:message>
+  <wsdl:message name="RecuperaEventiMailticketSoapOut">
+    <wsdl:part name="parameters" element="tns:RecuperaEventiMailticketResponse" />
+  </wsdl:message>
+  <wsdl:message name="RecuperaBigliettiManEinetSoapIn">
+    <wsdl:part name="parameters" element="tns:RecuperaBigliettiManEinet" />
+  </wsdl:message>
+  <wsdl:message name="RecuperaBigliettiManEinetSoapOut">
+    <wsdl:part name="parameters" element="tns:RecuperaBigliettiManEinetResponse" />
+  </wsdl:message>
+  <wsdl:message name="RecuperaBigliettiManMinetSoapIn">
+    <wsdl:part name="parameters" element="tns:RecuperaBigliettiManMinet" />
+  </wsdl:message>
+  <wsdl:message name="RecuperaBigliettiManMinetSoapOut">
+    <wsdl:part name="parameters" element="tns:RecuperaBigliettiManMinetResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServizioPrevenditaSoap">
+    <wsdl:operation name="VerificaCodicePR">
+      <wsdl:input message="tns:VerificaCodicePRSoapIn" />
+      <wsdl:output message="tns:VerificaCodicePRSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AggiungiAlCarrello">
+      <wsdl:input message="tns:AggiungiAlCarrelloSoapIn" />
+      <wsdl:output message="tns:AggiungiAlCarrelloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RimuoviDalCarrello">
+      <wsdl:input message="tns:RimuoviDalCarrelloSoapIn" />
+      <wsdl:output message="tns:RimuoviDalCarrelloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminaCarrello">
+      <wsdl:input message="tns:EliminaCarrelloSoapIn" />
+      <wsdl:output message="tns:EliminaCarrelloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfermaCarrello">
+      <wsdl:input message="tns:ConfermaCarrelloSoapIn" />
+      <wsdl:output message="tns:ConfermaCarrelloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AggiornaOrdine">
+      <wsdl:input message="tns:AggiornaOrdineSoapIn" />
+      <wsdl:output message="tns:AggiornaOrdineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistraAnagint">
+      <wsdl:input message="tns:RegistraAnagintSoapIn" />
+      <wsdl:output message="tns:RegistraAnagintSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RiepilogoOrdine">
+      <wsdl:input message="tns:RiepilogoOrdineSoapIn" />
+      <wsdl:output message="tns:RiepilogoOrdineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AvviaPagamentoOrdine">
+      <wsdl:input message="tns:AvviaPagamentoOrdineSoapIn" />
+      <wsdl:output message="tns:AvviaPagamentoOrdineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RicalcolaCarrello">
+      <wsdl:input message="tns:RicalcolaCarrelloSoapIn" />
+      <wsdl:output message="tns:RicalcolaCarrelloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ElencoOrdini">
+      <wsdl:input message="tns:ElencoOrdiniSoapIn" />
+      <wsdl:output message="tns:ElencoOrdiniSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaEventiMailticket">
+      <wsdl:input message="tns:RecuperaEventiMailticketSoapIn" />
+      <wsdl:output message="tns:RecuperaEventiMailticketSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaBigliettiManEinet">
+      <wsdl:input message="tns:RecuperaBigliettiManEinetSoapIn" />
+      <wsdl:output message="tns:RecuperaBigliettiManEinetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaBigliettiManMinet">
+      <wsdl:input message="tns:RecuperaBigliettiManMinetSoapIn" />
+      <wsdl:output message="tns:RecuperaBigliettiManMinetSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServizioPrevenditaSoap" type="tns:ServizioPrevenditaSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VerificaCodicePR">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/VerificaCodicePR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AggiungiAlCarrello">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/AggiungiAlCarrello" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RimuoviDalCarrello">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/RimuoviDalCarrello" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminaCarrello">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/EliminaCarrello" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfermaCarrello">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/ConfermaCarrello" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AggiornaOrdine">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/AggiornaOrdine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistraAnagint">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/RegistraAnagint" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RiepilogoOrdine">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/RiepilogoOrdine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AvviaPagamentoOrdine">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/AvviaPagamentoOrdine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RicalcolaCarrello">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/RicalcolaCarrello" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ElencoOrdini">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/ElencoOrdini" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaEventiMailticket">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/RecuperaEventiMailticket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaBigliettiManEinet">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/RecuperaBigliettiManEinet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaBigliettiManMinet">
+      <soap:operation soapAction="http://wsfiscale.mailticket.it/RecuperaBigliettiManMinet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServizioPrevenditaSoap12" type="tns:ServizioPrevenditaSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VerificaCodicePR">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/VerificaCodicePR" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AggiungiAlCarrello">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/AggiungiAlCarrello" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RimuoviDalCarrello">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/RimuoviDalCarrello" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminaCarrello">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/EliminaCarrello" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfermaCarrello">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/ConfermaCarrello" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AggiornaOrdine">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/AggiornaOrdine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistraAnagint">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/RegistraAnagint" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RiepilogoOrdine">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/RiepilogoOrdine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AvviaPagamentoOrdine">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/AvviaPagamentoOrdine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RicalcolaCarrello">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/RicalcolaCarrello" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ElencoOrdini">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/ElencoOrdini" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaEventiMailticket">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/RecuperaEventiMailticket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaBigliettiManEinet">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/RecuperaBigliettiManEinet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecuperaBigliettiManMinet">
+      <soap12:operation soapAction="http://wsfiscale.mailticket.it/RecuperaBigliettiManMinet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServizioPrevendita">
+    <wsdl:port name="ServizioPrevenditaSoap" binding="tns:ServizioPrevenditaSoap">
+      <soap:address location="https://wsfiscale.mailticket.it/servizioprevendita.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServizioPrevenditaSoap12" binding="tns:ServizioPrevenditaSoap12">
+      <soap12:address location="https://wsfiscale.mailticket.it/servizioprevendita.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
