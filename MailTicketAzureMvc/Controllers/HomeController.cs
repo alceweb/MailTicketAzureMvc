@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using MailTicketAzureMvc.ServizioPrevendita;
 using Microsoft.AspNet.Identity;
-
 namespace MailTicketAzureMvc.Controllers
 {
     public class HomeController : Controller
@@ -20,7 +19,9 @@ namespace MailTicketAzureMvc.Controllers
             }
             var service = new ServizioPrevendita.ServizioPrevendita();
             ViewBag.Service = service.RecuperaEventiMailticket().Length;
-            ViewData["Dataevento"] = service.RecuperaEventiMailticket();
+           var  eventi = service.RecuperaEventiMailticket();
+            
+            ViewBag.Eventi = eventi;
             return View();
         }
 

@@ -4,4 +4,13 @@
 
 <h3>@ViewBag.Message</h3>
 <p>Numero oggetti rilevati in RecuperaEventiMail: @ViewBag.Service</p>
-<p>@ViewData["Dataevento"]</p>
+
+<p>@foreach (var item in ViewBag.Eventi   )
+{
+       <strong>@item.idSpettMail;</strong>
+    <span> - </span>
+    @item.Spettacolo;
+    <br />
+    <br /><br />
+    <br />
+}</p>
