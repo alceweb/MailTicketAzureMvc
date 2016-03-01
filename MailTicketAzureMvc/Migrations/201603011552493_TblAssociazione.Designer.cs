@@ -13,7 +13,7 @@ namespace MailTicketAzureMvc.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201603011541396_TblAssociazione"; }
+            get { return "201603011552493_TblAssociazione"; }
         }
         
         string IMigrationMetadata.Source

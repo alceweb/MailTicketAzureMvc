@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
 
 namespace MailTicketAzureMvc.Models
 {
@@ -24,6 +25,13 @@ namespace MailTicketAzureMvc.Models
         }
     }
 
+    public class Associazione
+    {
+        [Key]
+        public string IdUtente { get; set; }
+        public string IdMan { get; set; }
+    }
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
@@ -36,6 +44,7 @@ namespace MailTicketAzureMvc.Models
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<MailTicketAzureMvc.Models.Associazione> Associazionis { get; set; }
 
     }
 }
