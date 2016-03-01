@@ -4,13 +4,27 @@
 
 <h3>@ViewBag.Message</h3>
 <p>Numero oggetti rilevati in RecuperaEventiMail: @ViewBag.Service</p>
-
+<input id="Text1" type="text" />
+@ViewBag.filtro
 <p>@foreach (var item in ViewBag.Eventi   )
 {
        <strong>@item.idSpettMail;</strong>
-    <span> - </span>
+    <span> - Spettacolo</span>
     @item.Spettacolo;
+    <span>- Location: </span>@item.Location;
     <br />
     <br /><br />
+
     <br />
 }</p>
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <img src="http://placehold.it/64x64">
+            <div class="caption">
+                <h3>Thumbnail caption heading</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+    </div>
+</div>

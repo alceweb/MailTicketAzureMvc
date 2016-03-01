@@ -19,7 +19,8 @@ namespace MailTicketAzureMvc.Controllers
             }
             var service = new ServizioPrevendita.ServizioPrevendita();
             ViewBag.Service = service.RecuperaEventiMailticket().Length;
-           var  eventi = service.RecuperaEventiMailticket();
+            ViewBag.filtro = "";
+            var  eventi = service.RecuperaEventiMailticket().OrderBy(r=>r.Location);
             
             ViewBag.Eventi = eventi;
             return View();
