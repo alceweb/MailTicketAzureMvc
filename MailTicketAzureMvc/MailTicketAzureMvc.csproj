@@ -184,9 +184,14 @@
     <Compile Include="Migrations\201602270757558_UserMan.Designer.cs">
       <DependentUpon>201602270757558_UserMan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603011541396_TblAssociazione.cs" />
+    <Compile Include="Migrations\201603011541396_TblAssociazione.Designer.cs">
+      <DependentUpon>201603011541396_TblAssociazione.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\Associazione.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PrevenditaModels.cs" />
@@ -320,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602270757558_UserMan.resx">
       <DependentUpon>201602270757558_UserMan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603011541396_TblAssociazione.resx">
+      <DependentUpon>201603011541396_TblAssociazione.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
