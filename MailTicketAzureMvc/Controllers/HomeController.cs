@@ -20,6 +20,7 @@ namespace MailTicketAzureMvc.Controllers
             }
             var service = new ServizioPrevendita.ServizioPrevendita();
             ViewBag.Service = service.RecuperaEventiMailticket().Length;
+            ViewData["Dataevento"] = service.RecuperaEventiMailticket();
             return View();
         }
 
