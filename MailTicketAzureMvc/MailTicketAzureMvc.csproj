@@ -188,6 +188,10 @@
     <Compile Include="Migrations\201603011552493_TblAssociazione.Designer.cs">
       <DependentUpon>201603011552493_TblAssociazione.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603031809162_Associazione1.cs" />
+    <Compile Include="Migrations\201603031809162_Associazione1.Designer.cs">
+      <DependentUpon>201603031809162_Associazione1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -210,6 +214,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\demo.jpg" />
     <Content Include="Content\Images\MailTicket.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -217,7 +222,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Properties\PublishProfiles\MailTicketPrevendita - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\MTMvc - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -254,6 +259,12 @@
     <Content Include="Web References\ServizioPrevendita\RispPrevendita.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Views\Home\PvSpettacoli.cshtml" />
+    <Content Include="Views\Home\PvManifestazioni.cshtml" />
+    <Content Include="Views\Home\AdmSpettacoli.cshtml" />
+    <Content Include="Views\Home\AdmManifestazioni.cshtml" />
+    <Content Include="Views\Home\IndexAdmin.cshtml" />
+    <Content Include="Views\Home\AdmEventi.cshtml" />
     <None Include="Web References\ServizioPrevendita\servizioprevendita.disco" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -327,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603011552493_TblAssociazione.resx">
       <DependentUpon>201603011552493_TblAssociazione.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603031809162_Associazione1.resx">
+      <DependentUpon>201603031809162_Associazione1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

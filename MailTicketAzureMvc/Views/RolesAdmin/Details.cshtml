@@ -14,11 +14,10 @@
             @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Name)<span class="badge">@ViewBag.UsersCount</span>
         </dd>
     </dl>
 </div>
-<h4>List of users in this role</h4>
 @if (ViewBag.UserCount == 0)
 {
     <hr />

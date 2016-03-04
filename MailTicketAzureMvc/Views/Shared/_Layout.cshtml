@@ -30,10 +30,10 @@
                 }
                 @if (Request.IsAuthenticated && !User.IsInRole("Admin"))
                 {
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Prima aazione", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Seconda azione", "Index", "Home")</li>
-                    </ul>
+                    @*<ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Manifestazioni", "PvManifestazioni", "Home")</li>
+                        <li>@Html.ActionLink("Spettacoli", "PvSpettacoli", "Home")</li>
+                    </ul>*@
                         }
                 @if (!Request.IsAuthenticated)
                 {

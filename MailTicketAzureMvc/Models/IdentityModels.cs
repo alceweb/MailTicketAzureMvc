@@ -30,6 +30,9 @@ namespace MailTicketAzureMvc.Models
         [Key]
         public string IdUtente { get; set; }
         public string IdMan { get; set; }
+        public string IdSpettacolo { get; set; }
+        public string IdEvento { get; set; }
+        public string IdSpettMail { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

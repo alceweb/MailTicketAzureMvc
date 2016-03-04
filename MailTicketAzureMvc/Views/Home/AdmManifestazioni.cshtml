@@ -1,0 +1,24 @@
+﻿<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message  <button id="Button1" type="button" class="btn btn-primary" >Assegna manifestazione <span class="badge">@ViewBag.EventiTot eventi</span></button></h3>
+<p></p>
+
+@*drop down list selezioe manifestazije la lascio in sospeso
+    @{var man = ViewBag.Man as IEnumerable<SelectListItem>;}
+       <span>Codice manifestazione</span>@Html.DropDownListFor(m=> man, man, new { @class = "btn btn-primary" })*@
+<table class="table">
+    <tr>
+        <th>Spettacolo </th>
+        <th>Location</th>
+        <th>Data</th>
+        <th>idEvento</th>
+    </tr>
+    @foreach (var item in ViewBag.Eventi)
+    {
+        <tr>
+            <td>@Html.ActionLink((string)@item.Spettacolo, "AdmSpettacoli", new { id = @item.Spettacolo})</td>
+            <td>@item.Location</td>
+            <td>@item.Dataevento</td>
+            <td>@Html.ActionLink((string)@item.idEvento, "AdmEventi", new { id = @item.idEvento })</td>
+        </tr>
+    }
+</table>

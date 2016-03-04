@@ -1,0 +1,20 @@
+﻿
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message <button id="Button1" type="button" class="btn btn-primary">Assegna spettacolo <span class="badge">@ViewBag.EventiTot eventi</span></button></h3>
+<table class="table">
+    <tr>
+        <th>Location</th>
+        <th>Dataevento</th>
+        <th>idMan</th>
+        <th>idEvento</th>
+    </tr>
+@foreach (var item in ViewBag.Eventi)
+{
+    <tr>
+        <td>@item.Location</td>
+        <td>@item.Dataevento</td>
+        <td>@Html.ActionLink((string)@item.idMan, "AdmManifestazioni", new { id = @item.idMan })</td>
+        <td>@Html.ActionLink((string)@item.idEvento, "AdmEventi", new { id = @item.idEvento })</td>
+    </tr>
+}
+</table>

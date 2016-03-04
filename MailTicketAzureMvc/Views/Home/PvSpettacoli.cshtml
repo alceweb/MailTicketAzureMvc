@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "PvSpettacoli";
+}
+
+<h2>PvSpettacoli</h2>
+@foreach (var item in ViewBag.Eventi)
+{
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <img src="~/Content/Images/demo.jpg" />
+            <div class="caption">
+                <h5>idSpettacolo @item.idSpettMail</h5>
+                <h5>idSpettMail @item.idSpettMail</h5>
+                <h3>@item.Spettacolo</h3>
+                <h4>@item.idMan</h4>
+                <p>@item.Location</p>
+                <p>@item.Dataevento</p>
+            </div>
+        </div>
+    </div>
+}

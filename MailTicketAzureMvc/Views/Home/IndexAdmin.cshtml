@@ -1,0 +1,27 @@
+﻿<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+<p><span class="badge">@ViewBag.EventiTot</span></p>
+<form></form>
+    <table class="table">
+        <tr>
+            <th>Evento </th>
+            <th>Dataevento</th>
+            <th>idSpettacolo</th>
+            <th>idEvento</th>
+            <th>idMan</th>
+            <th>idSpettMail</th>
+        </tr>
+        @foreach (var item in ViewBag.Eventi)
+        {
+            <tr>
+                <td>@Html.ActionLink((string)@item.Spettacolo, "AdmSpettacoli", new { id = @item.Spettacolo })</td>
+                <td>@item.Dataevento</td>
+                <td>@item.idSpettacolo</td>
+                <td>@Html.ActionLink((string)@item.idEvento, "AdmEventi", new { id = @item.idEvento })</td>
+                <td>@Html.ActionLink((string)@item.idMan, "AdmManifestazioni", new { id = @item.idMan })</td>
+                <td>@item.idSpettMail</td>
+            </tr>
+        }
+    </table>
+
+@ViewBag.Eventi

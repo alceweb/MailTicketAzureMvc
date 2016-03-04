@@ -1,0 +1,20 @@
+﻿
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="row">
+    @foreach (var item in ViewBag.Eventi)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="~/Content/Images/demo.jpg" />
+                <div class="caption">
+                    <h3>@item.Spettacolo</h3>
+                    <p>@item.Location - @item.Dataevento</p>
+                    <input id="Button1" type="button" value="Assegna evento" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

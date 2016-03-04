@@ -81,7 +81,7 @@ namespace MailTicketAzureMvc.Controllers
             }
 
             ViewBag.Users = users;
-            ViewBag.UserCount = users.Count();
+            ViewBag.UsersCount = users.Count();
             return View(role);
         }
 
