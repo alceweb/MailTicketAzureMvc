@@ -1,0 +1,58 @@
+﻿@model MailTicketAzureMvc.Models.Associazione
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Associazione</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdUtente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdUtente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdMan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdMan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdSpettacolo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdSpettacolo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdEvento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdEvento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdSpettMail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdSpettMail)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Associazione }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -6,10 +6,14 @@ using System.Web.Mvc;
 using MailTicketAzureMvc.ServizioPrevendita;
 using Microsoft.AspNet.Identity;
 using System.Net;
+using MailTicketAzureMvc.Models;
+
 namespace MailTicketAzureMvc.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         [Authorize]
         public ActionResult Index()
         {
@@ -93,43 +97,47 @@ namespace MailTicketAzureMvc.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             var service = new ServizioPrevendita.ServizioPrevendita();
             ViewBag.Service = service.RecuperaEventiMailticket().Length;
             ViewBag.Title = "Admin spettacoli";
             ViewBag.Message = id;
             var eventi = service.RecuperaEventiMailticket()
-                .OrderBy(r => r.idMan).Where(r=>r.Spettacolo == id);
+                .OrderBy(r => r.idMan).Where(r => r.Spettacolo == id);
             ViewBag.Eventi = eventi;
             ViewBag.EventiTot = eventi.Count();
-            return View(ViewBag.Eventi);
+            return View();
         }
         public ActionResult AdmManifestazioni(string id)
         {
-            //drop down list selzione manifestazioni - la lascio in sospeso 
-            //var man = service.RecuperaEventiMailticket()
-            //    .OrderBy(m=>m.idMan)
-            //    .GroupBy(ind => new { ind.idMan })
-            //    .Select(group => new SelectListItem
-            //    {
-            //        Text = group.First().idMan,
-            //        Value = group.First().idMan
-            //    });
-            //ViewBag.Man = man;
+            ViewData["ut"] = db.Users.ToList();
+            ViewBag.IdUtente = new SelectList(db.Users, "Id", "Insegna");
+            var service = new ServizioPrevendita.ServizioPrevendita();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var service = new ServizioPrevendita.ServizioPrevendita();
             ViewBag.Service = service.RecuperaEventiMailticket().Length;
             ViewBag.Title = "Admin manifestazioni";
             ViewBag.Message = id;
             var eventi = service.RecuperaEventiMailticket()
-                .OrderBy(r => r.idMan).Where(r => r.idMan == id);
+                .OrderBy(r => r.Spettacolo).Where(r => r.idMan == id);
             ViewBag.Eventi = eventi;
             ViewBag.EventiTot = eventi.Count();
-            return View(ViewBag.Eventi);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AdmManifestazioni([Bind(Include = "idUtente,Idman")] Associazione associazione)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Associazionis.Add(associazione);
+                db.SaveChanges();
+                return RedirectToAction("indexAdmin", "home");
+            }
+            ViewBag.Title = "fallito";
+            return RedirectToAction("Contact", "Home");
         }
     }
 }

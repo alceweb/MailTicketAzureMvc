@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MailTicketAzureMvc.Models.Associazione>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdUtente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdMan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdSpettacolo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdEvento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdSpettMail)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdUtente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdMan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdSpettacolo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdEvento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdSpettMail)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_Associazione }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id_Associazione }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_Associazione })
+        </td>
+    </tr>
+}
+
+</table>

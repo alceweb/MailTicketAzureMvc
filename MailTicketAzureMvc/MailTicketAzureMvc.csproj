@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationUsersController.cs" />
+    <Compile Include="Controllers\AssociazionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
@@ -191,6 +192,10 @@
     <Compile Include="Migrations\201603031809162_Associazione1.cs" />
     <Compile Include="Migrations\201603031809162_Associazione1.Designer.cs">
       <DependentUpon>201603031809162_Associazione1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603041448490_AssociazioneId.cs" />
+    <Compile Include="Migrations\201603041448490_AssociazioneId.Designer.cs">
+      <DependentUpon>201603041448490_AssociazioneId.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -265,6 +270,11 @@
     <Content Include="Views\Home\AdmManifestazioni.cshtml" />
     <Content Include="Views\Home\IndexAdmin.cshtml" />
     <Content Include="Views\Home\AdmEventi.cshtml" />
+    <Content Include="Views\Associaziones\Create.cshtml" />
+    <Content Include="Views\Associaziones\Delete.cshtml" />
+    <Content Include="Views\Associaziones\Details.cshtml" />
+    <Content Include="Views\Associaziones\Edit.cshtml" />
+    <Content Include="Views\Associaziones\Index.cshtml" />
     <None Include="Web References\ServizioPrevendita\servizioprevendita.disco" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -341,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603031809162_Associazione1.resx">
       <DependentUpon>201603031809162_Associazione1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603041448490_AssociazioneId.resx">
+      <DependentUpon>201603041448490_AssociazioneId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

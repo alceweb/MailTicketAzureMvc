@@ -28,6 +28,7 @@ namespace MailTicketAzureMvc.Models
     public class Associazione
     {
         [Key]
+        public int Id_Associazione { get; set; }
         public string IdUtente { get; set; }
         public string IdMan { get; set; }
         public string IdSpettacolo { get; set; }
