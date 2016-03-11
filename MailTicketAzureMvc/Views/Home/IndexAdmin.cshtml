@@ -14,11 +14,11 @@
         @foreach (var item in ViewBag.Eventi)
         {
             <tr>
-                <td>@Html.ActionLink((string)@item.Spettacolo, "AdmSpettacoli", new { id = @item.Spettacolo })</td>
+                <td>@Html.ActionLink((string)@item.Spettacolo, "AdmSpettacoli", new { man = @item.idMan, spe = @item.Spettacolo })</td>
                 <td>@item.Dataevento</td>
                 <td>@item.idSpettacolo</td>
                 <td>@Html.ActionLink((string)@item.idEvento, "AdmEventi", new { id = @item.idEvento })</td>
-                <td>@Html.ActionLink((string)@item.idMan, "AdmManifestazioni", new { id = @item.idMan })</td>
+                <td>@Html.ActionLink((string)@item.idMan, "AdmManifestazioni", new { man = @item.idMan })</td>
                 <td>@item.idSpettMail</td>
             </tr>
         }

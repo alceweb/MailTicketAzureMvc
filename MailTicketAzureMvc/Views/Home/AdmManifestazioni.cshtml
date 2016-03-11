@@ -1,39 +1,38 @@
-﻿<h2>@ViewBag.Title</h2>
+﻿
+<h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Assegna manifestazione <span class="badge">@ViewBag.EventiTot eventi</span></button></h3>
 @using (Html.BeginForm())
 {
     <input name="IdMan" id="Text1" type="text" value="@ViewBag.Message" />
-<div class="collapse" id="collapseExample">
-    <div class="well">
-        <div class="row">
-            <div class="col col-sm-2">
-                @*@Html.DropDownList("IdUtente", new SelectList((System.Collections.IEnumerable)ViewData["ut"], "Id", "Email"))*@
-                @Html.DropDownList("IdUtente", null, "Scegli l'insegna", htmlAttributes: new { @class = "form-control" })
-            </div>
-            <div class="col col-sm-2">
-                <input id="Button1" type="submit" value="Assegna" class="btn btn-success" />
+    <div class="collapse" id="collapseExample">
+        <div class="well">
+            <div class="row">
+                <div class="col col-sm-2">
+                    @Html.DropDownList("IdUtente", null, "Scegli l'insegna", htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="col col-sm-2">
+                    <input id="Button1" type="submit" value="Assegna" class="btn btn-success" />
 
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-
-<table class="table">
-    <tr>
-        <th>Spettacolo </th>
-        <th>Location</th>
-        <th>Data</th>
-        <th>idEvento</th>
-    </tr>
-    @foreach (var item in ViewBag.Eventi)
-    {
+    <table class="table">
         <tr>
-            <td>@Html.ActionLink((string)@item.Spettacolo, "AdmSpettacoli", new { id = @item.Spettacolo})</td>
-            <td>@item.Location</td>
-            <td>@item.Dataevento</td>
-            <td>@Html.ActionLink((string)@item.idEvento, "AdmEventi", new { id = @item.idEvento })</td>
+            <th>Spettacolo </th>
+            <th>Location</th>
+            <th>Data</th>
+            <th>id evento</th>
         </tr>
-    }
-</table>
+@foreach (var item in ViewBag.Eventi)
+{
+            <tr>
+                <td>@Html.ActionLink((string)@item.Spettacolo, "AdmSpettacoli", new { id = @item.Spettacolo})</td>
+                <td>@item.Location</td>
+                <td>@item.Dataevento</td>
+                <td>
+                </td>
+            </tr>
+        }
+    </table>
 }

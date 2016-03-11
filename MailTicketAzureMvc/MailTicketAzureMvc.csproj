@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201603041448490_AssociazioneId.Designer.cs">
       <DependentUpon>201603041448490_AssociazioneId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603110939343_addSpettaoloToAssociazioni.cs" />
+    <Compile Include="Migrations\201603110939343_addSpettaoloToAssociazioni.Designer.cs">
+      <DependentUpon>201603110939343_addSpettaoloToAssociazioni.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
@@ -275,6 +279,9 @@
     <Content Include="Views\Associaziones\Details.cshtml" />
     <Content Include="Views\Associaziones\Edit.cshtml" />
     <Content Include="Views\Associaziones\Index.cshtml" />
+    <Content Include="Views\Home\test.cshtml" />
+    <Content Include="Views\Home\AssegnaManKo.cshtml" />
+    <Content Include="Views\Home\AssegnaManOk.cshtml" />
     <None Include="Web References\ServizioPrevendita\servizioprevendita.disco" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -354,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603041448490_AssociazioneId.resx">
       <DependentUpon>201603041448490_AssociazioneId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603110939343_addSpettaoloToAssociazioni.resx">
+      <DependentUpon>201603110939343_addSpettaoloToAssociazioni.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

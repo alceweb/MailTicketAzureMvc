@@ -34,6 +34,7 @@ namespace MailTicketAzureMvc.Models
         public string IdSpettacolo { get; set; }
         public string IdEvento { get; set; }
         public string IdSpettMail { get; set; }
+        public string Spettacolo { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
