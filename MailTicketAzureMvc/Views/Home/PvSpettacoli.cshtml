@@ -1,22 +1,51 @@
-﻿
+﻿@model IEnumerable<MailTicketAzureMvc.ServizioPrevendita.EventoMail>
+
 @{
     ViewBag.Title = "PvSpettacoli";
 }
-
 <h2>PvSpettacoli</h2>
-@foreach (var item in ViewBag.Eventi)
+@ViewBag.CarrelloOk
+
+    <div class="row text-warning">
+        <div class="col col-md-1">
+        </div>
+        <div class="col col-md-1">
+                Id Man Ev
+        </div>
+        <div class="col col-md-3">
+            Location
+        </div>
+        <div class="col col-md-3">
+            Spettacolo
+        </div>
+        <div class="col col-md-3">
+            Data
+        </div>
+    </div><hr />
+@foreach (var items in ViewBag.Spettacoli)
 {
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <img src="~/Content/Images/demo.jpg" />
-            <div class="caption">
-                <h5>idSpettacolo @item.idSpettMail</h5>
-                <h5>idSpettMail @item.idSpettMail</h5>
-                <h3>@item.Spettacolo</h3>
-                <h4>@item.idMan</h4>
-                <p>@item.Location</p>
-                <p>@item.Dataevento</p>
+    foreach (var item in Model.Where(s => s.idMan == items.IdMan & s.idEvento == items.IdEvento))
+    {
+        <div class="row">
+            <div class="col col-md-1">
+                @Html.ActionLink("+ Carrello", "", "")
+            </div>
+            <div class="col col-md-1">
+                <strong>
+                    <span>@Html.DisplayFor(modelItem => item.idMan)</span>
+                    <span>@Html.DisplayFor(modelItem => item.idEvento)</span>
+                </strong>
+            </div>
+            <div class="col col-md-3">
+                <em><span>@Html.DisplayFor(modelItem => item.Location)</span></em>
+            </div>
+            <div class="col col-md-3">
+                @Html.DisplayFor(modelItem => item.Spettacolo)
+             </div>
+            <div class="col col-md-3">
+                @Html.DisplayFor(modelItem => item.Dataevento)
             </div>
         </div>
-    </div>
+    }
+
 }

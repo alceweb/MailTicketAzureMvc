@@ -31,3 +31,6 @@ textarea {
 .obj-header{
     font-size:1.7em;
 }
+.td1{
+border-top:0px !important;
+}

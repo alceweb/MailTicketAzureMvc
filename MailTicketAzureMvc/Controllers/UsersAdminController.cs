@@ -56,6 +56,7 @@ namespace MailTicketAzureMvc.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
+            ViewBag.Title = "Gestione punti vendita";
             ViewBag.UtentiCount = UserManager.Users.Count();
             return View(await UserManager.Users.ToListAsync());
         }

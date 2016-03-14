@@ -282,6 +282,7 @@
     <Content Include="Views\Home\test.cshtml" />
     <Content Include="Views\Home\AssegnaManKo.cshtml" />
     <Content Include="Views\Home\AssegnaManOk.cshtml" />
+    <Content Include="Views\Home\IndexPv.cshtml" />
     <None Include="Web References\ServizioPrevendita\servizioprevendita.disco" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

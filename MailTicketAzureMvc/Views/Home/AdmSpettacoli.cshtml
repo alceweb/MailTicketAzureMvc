@@ -1,36 +1,45 @@
 ﻿
 <h2>@ViewBag.Title</h2>
-<h3>@ViewBag.Message <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Assegna spettacoli <span class="badge">@ViewBag.EventiTot eventi</span></button></h3>
-@using (Html.BeginForm())
-{
-    <div class="collapse" id="collapseExample">
-        <div class="well">
-            <div class="row">
-                <div class="col col-sm-2">
-                    @Html.DropDownList("IdUtente", null, "Scegli l'insegna", htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="col col-sm-2">
-                    <input id="Button1" type="submit" value="Assegna" class="btn btn-success" />
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <table class="table">
-        <tr>
-            <th>Location</th>
-            <th>Dataevento</th>
-            <th>idMan</th>
-            <th>idEvento</th>
-        </tr>
-    @foreach (var item in ViewBag.Eventi)
+<h3>@ViewBag.Message <span class="badge">@ViewBag.EventiTot eventi</span></h3>
+    @using (Html.BeginForm())
     {
-        <tr>
-            <td>@item.Location</td>
-            <td>@item.Dataevento</td>
-            <td>@Html.ActionLink((string)@item.idMan, "AdmManifestazioni", new { id = @item.idMan })</td>
-            <td>@Html.ActionLink((string)@item.idEvento, "AdmEventi", new { id = @item.idEvento })</td>
+        <table class="table">
+            <tr>
+                <th>Location</th>
+                <th>Dataevento</th>
+                <th>idMan</th>
+                <th>idEvento</th>
+                <th></th>
+            </tr>
+            @foreach (var item in ViewBag.Eventi)
+            {
+                <tr>
+                    <td>@item.Location</td>
+                    <td>@item.Dataevento</td>
+                    <td>@Html.ActionLink((string)@item.idMan, "AdmManifestazioni", new { id = @item.idMan })</td>
+                    <td>@Html.ActionLink((string)@item.idEvento, "AdmEventi", new { id = @item.idEvento })</td>
+                    <td>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#@item.idEvento" aria-expanded="false" aria-controls="collapseExample">Assegna evento </button>
+                     </td>
+                    </tr>
+                    <tr>
+                    <td class="td1">   
+                        <div class="collapse" id="@item.idEvento">
+                            <div class="well">
+                                <div class="row">
+                                    <div class="col col-sm-6">
+                                        @Html.DropDownList("IdUtente", null, "Scegli l'insegna", htmlAttributes: new { @class = "form-control" })
+                                    </div>
+                                    <div class="col col-sm-6">
+                                        <input id="Button1" type="submit" value="Assegna" class="btn btn-success" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            </td>
         </tr>
+            }
+            </table>
     }
-    </table>
-}

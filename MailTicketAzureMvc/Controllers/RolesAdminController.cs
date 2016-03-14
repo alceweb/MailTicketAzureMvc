@@ -55,6 +55,7 @@ namespace MailTicketAzureMvc.Controllers
         // GET: /Roles/
         public ActionResult Index()
         {
+            ViewBag.Title = "Gestione ruoli";
             ViewBag.RolesCount = RoleManager.Roles.Count();
             return View(RoleManager.Roles);
         }

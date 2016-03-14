@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,7 +18,9 @@ namespace MailTicketAzureMvc.Controllers
         // GET: Associaziones
         public ActionResult Index()
         {
-            return View(db.Associazionis.ToList());
+            var utente = User.Identity.GetUserId();
+            var spettacoli = db.Associazionis.Where(u => u.IdUtente == utente).ToList();
+            return View(db.Associazionis.Where(u=>u.IdUtente== utente).ToList());
         }
 
         // GET: Associaziones/Details/5

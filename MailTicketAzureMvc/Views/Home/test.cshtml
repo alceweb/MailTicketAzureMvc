@@ -1,6 +1,25 @@
-﻿@{
+﻿@model IEnumerable<MailTicketAzureMvc.ServizioPrevendita.EventoMail>
+
+@{
     ViewBag.Title = "test";
 }
 
 <h2>test</h2>
-@ViewBag.Verifica
+@foreach (var items in ViewBag.Spettacoli)
+{<hr />
+    @items.IdMan    <span>-</span> @items.IdEvento
+<hr />
+    foreach (var item in Model.Where(s=>s.idMan==items.IdMan & s.idEvento == items.IdEvento))
+    {
+        <strong>
+            <span>@Html.DisplayFor(modelItem => item.idMan) -</span>
+            <span>@Html.DisplayFor(modelItem => item.idEvento) -</span>
+        </strong>
+        <span>@Html.DisplayFor(modelItem => item.Spettacolo) -</span>
+        <span>@Html.DisplayFor(modelItem => item.Dataevento) -</span>
+        <span>@Html.DisplayFor(modelItem => item.Location) -</span>
+        <br />
+    }
+
+}
+

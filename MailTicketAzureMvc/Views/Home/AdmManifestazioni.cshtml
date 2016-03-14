@@ -3,7 +3,7 @@
 <h3>@ViewBag.Message  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Assegna manifestazione <span class="badge">@ViewBag.EventiTot eventi</span></button></h3>
 @using (Html.BeginForm())
 {
-    <input name="IdMan" id="Text1" type="text" value="@ViewBag.Message" />
+    @*<input name="IdMan" id="Text1" type="text" value="@ViewBag.Message" />*@
     <div class="collapse" id="collapseExample">
         <div class="well">
             <div class="row">
@@ -30,7 +30,7 @@
                 <td>@Html.ActionLink((string)@item.Spettacolo, "AdmSpettacoli", new { id = @item.Spettacolo})</td>
                 <td>@item.Location</td>
                 <td>@item.Dataevento</td>
-                <td>
+                <td>@item.idEvento
                 </td>
             </tr>
         }

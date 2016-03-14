@@ -25,7 +25,7 @@ namespace MailTicketAzureMvc.Controllers
                 return RedirectToAction("IndexAdmin");
             }
             else {
-                return RedirectToAction("PvManifestazioni");
+                return RedirectToAction("PvSpettacoli");
             }
         }
 
@@ -33,8 +33,8 @@ namespace MailTicketAzureMvc.Controllers
         {
             var service = new ServizioPrevendita.ServizioPrevendita();
             ViewBag.Service = service.RecuperaEventiMailticket().Length;
-            ViewBag.Title = "Home amministratore";
-            ViewBag.Message = "Eventi a disposizione per la prevendita";
+            ViewBag.Title = "Gestione spettacoli";
+            ViewBag.Message = "Eventi";
             var eventi = service.RecuperaEventiMailticket()
                 .OrderBy(r => r.idMan).ThenBy(r=>r.idEvento);
             ViewBag.Eventi = eventi;
@@ -42,6 +42,10 @@ namespace MailTicketAzureMvc.Controllers
             return View();
         }
 
+        public ActionResult IndexPv()
+        {
+            return View();
+        }
         public ActionResult About()
         {
             ViewBag.Title = "Istruzioni per l'uso";
@@ -59,17 +63,15 @@ namespace MailTicketAzureMvc.Controllers
         }
         public ActionResult PvSpettacoli()
         {
+            ViewBag.CarrelloOk = "";
             var utente = User.Identity.GetUserId();
+            var spettacoli = db.Associazionis.Where(r => r.IdUtente == utente);
+            ViewBag.Spettacoli = spettacoli;
             var service = new ServizioPrevendita.ServizioPrevendita();
-            ViewBag.Service = service.RecuperaEventiMailticket().Length;
-            ViewBag.Title = "Home amministratore";
-            ViewBag.Message = "Spettacoli";
-            var groupedMan = service.RecuperaEventiMailticket().GroupBy(r => r.idMan);
-            var eventi = service.RecuperaEventiMailticket()
-                .OrderBy(r => r.idMan).Where(r=>r.idEvento == "1");
-            ViewBag.Eventi = eventi;
-            return View();
+            var eventi = service.RecuperaEventiMailticket();
+            return View(eventi.ToList());
         }
+
         public ActionResult PvManifestazioni()
         {
             ViewBag.Title = "Manifestazioni";
@@ -179,13 +181,14 @@ namespace MailTicketAzureMvc.Controllers
             if (verifica.Count() == 0)
             {
                 var service = new ServizioPrevendita.ServizioPrevendita();
-                var eventi = service.RecuperaEventiMailticket().OrderBy(r => r.Spettacolo).Where(r=>r.idMan == Request["idMan"]);
+                var eventi = service.RecuperaEventiMailticket().OrderBy(r => r.Spettacolo).Where(r=>r.idMan == Request["Man"]);
                     ViewBag.Eventi = eventi;
                     ViewBag.Eventis = eventi;
                     foreach (var item in ViewBag.Eventis)
                     {
                         if (ModelState.IsValid)
                         {
+                            associazione.IdMan = item.idMan;
                             associazione.IdEvento = item.idEvento;
                             associazione.IdSpettacolo = item.idSpettacolo;
                             associazione.IdSpettMail = item.idSpettMail;
@@ -222,17 +225,14 @@ namespace MailTicketAzureMvc.Controllers
             ViewBag.Title = "fallito";
             return RedirectToAction("Contact", "Home");
         }
-        public ActionResult test([Bind(Include = "IdUtente,Idman,IdEvento,IdSpettMail")] Associazione associazione)
+        public ActionResult test()
         {
-                var verifica = db.Associazionis.Include("IdEvento,IdSpettacolo,IdSpettMail,IdMan,IdUtente").Where(u=>u.IdUtente == "e78a741d-0b24-4926-a3d8-2b5155e33fc8");
-            if (verifica.Count() > 0)
-            {
-            ViewBag.Verifica = verifica.Count();
-
-            }
-            ViewBag.Verifica = verifica.Count();
-                return View();
+            var utente = User.Identity.GetUserId();
+            var spettacoli = db.Associazionis.Where(r => r.IdUtente == utente);
+            ViewBag.Spettacoli = spettacoli;
+            var service = new ServizioPrevendita.ServizioPrevendita();
+            var eventi = service.RecuperaEventiMailticket();
+            return View(eventi.ToList());
         }
-
     }
 }
