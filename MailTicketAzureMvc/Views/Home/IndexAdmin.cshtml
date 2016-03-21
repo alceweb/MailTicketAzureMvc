@@ -1,27 +1,47 @@
-﻿<h2>@ViewBag.Title</h2>
-<div class="btn btn-primary"><span class="badge">@ViewBag.EventiTot</span> @ViewBag.Message</div>
+﻿    
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col col-md-2">
+            <div class="btn btn-primary"><span class="badge">@ViewBag.EventiTot</span> @ViewBag.Message</div>
+        </div>
+        <div class="col-md-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." name="cerca">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+                </div>
+  
+
+            </div>
+  
+
+        </div>
+}
 <p></p>
-<form></form>
     <table class="table">
         <tr>
-            <th>Evento </th>
-            <th>Dataevento</th>
-            <th>idSpettacolo</th>
-            <th>idEvento</th>
-            <th>idMan</th>
-            <th>idSpettMail</th>
+            <th>Man</th>
+            <th>Spettacolo </th>
+            <th>Evento</th>
+            <th>Data</th>
+            <th>Location</th>
         </tr>
         @foreach (var item in ViewBag.Eventi)
         {
             <tr>
-                <td>@Html.ActionLink((string)@item.Spettacolo, "AdmSpettacoli", new { man = @item.idMan, spe = @item.Spettacolo })</td>
-                <td>@item.Dataevento</td>
-                <td>@item.idSpettacolo</td>
-                <td>@Html.ActionLink((string)@item.idEvento, "AdmEventi", new { id = @item.idEvento })</td>
                 <td>@Html.ActionLink((string)@item.idMan, "AdmManifestazioni", new { man = @item.idMan })</td>
-                <td>@item.idSpettMail</td>
+                <td>@Html.ActionLink((string)@item.Spettacolo, "AdmSpettacoli", new { man = @item.idMan, spe = @item.Spettacolo})</td>
+                <td>
+                    @{ string man = @item.idMan; string even = item.idEvento;}
+                @Html.ActionLink(man +"-" + even, "AdmEventi", new { man = @item.idMan, spe = @item.Spettacolo, eve = @item.idEvento})</td>
+                <td>@item.Dataevento</td>
+                <td>@item.Location</td>
             </tr>
-        }
+                        }
     </table>
 
-@ViewBag.Eventi

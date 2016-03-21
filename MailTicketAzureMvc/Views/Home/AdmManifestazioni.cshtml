@@ -20,18 +20,20 @@
     <table class="table">
         <tr>
             <th>Spettacolo </th>
-            <th>Location</th>
+            <th>Evento</th>
             <th>Data</th>
-            <th>id evento</th>
+            <th>Location</th>
         </tr>
 @foreach (var item in ViewBag.Eventi)
 {
             <tr>
-                <td>@Html.ActionLink((string)@item.Spettacolo, "AdmSpettacoli", new { id = @item.Spettacolo})</td>
-                <td>@item.Location</td>
-                <td>@item.Dataevento</td>
-                <td>@item.idEvento
+                <td>@Html.ActionLink((string)@item.Spettacolo, "AdmSpettacoli", new { man = @item.idMan, spe = @item.Spettacolo })</td>
+                <td>
+                    @{ string man = @item.idMan; string even = item.idEvento;}
+                    @Html.ActionLink(man + "-" + even, "AdmEventi", new { man = @item.idMan, spe = @item.Spettacolo, eve = @item.idEvento })
                 </td>
+                <td>@item.Dataevento</td>
+                <td>@item.Location</td>
             </tr>
         }
     </table>

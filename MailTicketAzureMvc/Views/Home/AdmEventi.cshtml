@@ -1,20 +1,40 @@
 ﻿
 <h2>@ViewBag.Title</h2>
-<h3>@ViewBag.Message</h3>
+<h3>
+    @ViewBag.Message <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapseExample">Assegna evento <span class="badge">@ViewBag.EventiTot eventi</span></button>
+</h3>
 
-<div class="row">
-    @foreach (var item in ViewBag.Eventi)
-    {
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <img src="~/Content/Images/demo.jpg" />
-                <div class="caption">
-                    <h3>@item.Spettacolo</h3>
-                    <p>@item.Location - @item.Dataevento</p>
-                    <input id="Button1" type="button" value="Assegna evento" class="btn btn-primary" />
+@using (Html.BeginForm())
+{
+    <div class="collapse" id="collapse1">
+        <div class="well">
+            <div class="row">
+                <div class="col col-sm-6">
+                    @Html.DropDownList("IdUtente", null, "Scegli l'insegna", htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="col col-sm-6">
+                    <input id="Button1" type="submit" value="Assegna" class="btn btn-success" />
+
                 </div>
             </div>
         </div>
-
-    }
-</div>
+    </div>
+        <table class="table">
+            <tr>
+                <th>Man</th>
+                <th>Spettacolo </th>
+                <th>Data</th>
+                <th>Location</th>
+                <th></th>
+            </tr>
+            @foreach (var item in ViewBag.Eventi)
+            {
+                <tr>
+                    <td>@Html.ActionLink((string)@item.idMan, "AdmManifestazioni", new { man = @item.idMan })</td>
+                    <td>@Html.ActionLink((string)@item.Spettacolo, "AdmSpettacoli", new { man = @item.idMan, spe = @item.Spettacolo })</td>
+                    <td>@item.Dataevento</td>
+                    <td>@item.Location</td>
+                </tr>
+            }
+        </table>
+}
