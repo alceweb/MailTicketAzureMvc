@@ -259,28 +259,37 @@ namespace MailTicketAzureMvc.Controllers
             ViewBag.Message = man;
             var eventi = service.RecuperaEventiMailticket().Where(r => r.idMan == man);
             ViewBag.Eventi = eventi;
-            ViewBag.Eventis = eventi;
-                   foreach (var item in ViewBag.Eventis)
+            ViewBag.EventiTot = eventi.Count();
+            if (!string.IsNullOrEmpty(utente))
+            {
+                ViewBag.Eventis = eventi;
+                foreach (var item in ViewBag.Eventi)
+                {
+                    if (ModelState.IsValid)
                     {
-                        if (ModelState.IsValid)
+                        //verifico se il singolo evento è già assegnato
+                        string verificaEv = item.idEvento;
+                        string verificaSpe = item.Spettacolo;
+                        var verifica = db.Associazionis.Where(e => e.IdUtente == utente & e.IdMan == man & e.Spettacolo == verificaSpe & e.IdEvento == verificaEv).Count();
+                        if (verifica == 0)
+                        //se non è assegnato inserisco i record
                         {
-                            //verifico se il singolo evento è già assegnato
-                            string verificaEv = item.idEvento;
-                            string verificaSpe = item.Spettacolo;
-                            var verifica = db.Associazionis.Where(e => e.IdMan == man & e.Spettacolo == verificaSpe & e.IdEvento == verificaEv).Count();
-                            if (verifica == 0)
-                            //se non è assegnato inserisco i record
-                            {
-                                associazione.IdMan = item.idMan;
-                                associazione.IdEvento = item.idEvento;
-                                associazione.IdSpettacolo = item.idSpettacolo;
-                                associazione.IdSpettMail = item.idSpettMail;
-                                associazione.Spettacolo = item.Spettacolo;
-                                db.Associazionis.Add(associazione);
-                                db.SaveChanges();
-                            }
+                            associazione.IdMan = item.idMan;
+                            associazione.IdEvento = item.idEvento;
+                            associazione.IdSpettacolo = item.idSpettacolo;
+                            associazione.IdSpettMail = item.idSpettMail;
+                            associazione.Spettacolo = item.Spettacolo;
+                            db.Associazionis.Add(associazione);
+                            db.SaveChanges();
                         }
                     }
+                }
+            }
+            else
+            {
+                ViewBag.Ko = "non hai selezionato l'insegna!";
+                return View();
+            }
             return RedirectToAction("AssegnaManOk");
         }
         public ActionResult AssegnaMan([Bind(Include = "idUtente,Idman,IdEvento,IdSpettMail")] Associazione associazione)

@@ -1,17 +1,18 @@
 ﻿
 <h2>@ViewBag.Title</h2>
-<h3>@ViewBag.Message <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapseExample">Assegna manifestazione<span class="badge">@ViewBag.EventiTot eventi</span></button></h3>
+<h3>@ViewBag.Message 
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapseExample">Assegna manifestazione<span class="badge">@ViewBag.EventiTot eventi</span></button>
+    
+    </h3>
+<span class="btn-danger">@ViewBag.Ko</span>
+    @*<input name="IdMan" id="Text1" type="text" value="@ViewBag.Message" />*@
 @using (Html.BeginForm())
 {
-    @*<input name="IdMan" id="Text1" type="text" value="@ViewBag.Message" />*@
     <div class="collapse" id="collapse1">
         <div class="well">
             <div class="row">
                 <div class="col col-sm-2">
                     @Html.DropDownList("IdUtente", null, "Scegli l'insegna", htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="col col-sm-2">
-                    <input name="btnControlla" type="submit" value="Controlla assegnazione" class="btn btn-danger" />
                 </div>
                 <div class="col col-sm-2">
                     <input name="btnAssegna" type="submit" value="Assegna" class="btn btn-success" />
@@ -20,10 +21,10 @@
             </div>
         </div>
     </div>
+}
     <table class="table">
         <tr>
-            <th>Spettacolo 
-                <span class="glyphicon glyphicon-info-sign"></span></th>
+            <th>Spettacolo</th>
             <th>Evento</th>
             <th>Data</th>
             <th>Location</th>
@@ -41,4 +42,3 @@
             </tr>
         }
     </table>
-}
