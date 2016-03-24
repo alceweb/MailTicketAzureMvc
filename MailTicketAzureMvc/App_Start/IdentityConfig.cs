@@ -150,6 +150,7 @@ namespace MailTicketAzureMvc
         }
     }
 
+
     // Configurare la gestione accessi usata in questa applicazione.
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {

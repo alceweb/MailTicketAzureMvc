@@ -1,0 +1,44 @@
+﻿@model MailTicketAzureMvc.Models.Associazione
+
+   <h2>@ViewBag.Title </h2>
+@foreach (var item in @ViewBag.Message)
+{
+    <h4>Insegna: <strong>@item.Insegna</strong> - Email: <strong>@item.Email</strong></h4>
+}
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Evento
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdMan) - @Html.DisplayFor(model => model.IdEvento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Spettacolo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Spettacolo)
+        </dd>
+        <dt>
+            Data
+        </dt>
+        <dd>
+            @Request["data"]
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Rimuovi" class="btn btn-danger" /> |
+            @Html.ActionLink("Torna alla lista", "EventiPv", new { uid = Request["uid"] })
+        </div>
+    }
+</div>

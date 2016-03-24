@@ -15,6 +15,8 @@ namespace MailTicketAzureMvc.Controllers
 {
     public class UsersAdminController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public UsersAdminController()
         {
         }
@@ -252,6 +254,57 @@ namespace MailTicketAzureMvc.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        public ActionResult EventiPv(string uid)
+        {
+            var utente = UserManager.Users.Where(u=>u.Id == uid);
+            ViewBag.Title = "Eventi assegnati";
+            ViewBag.Message = utente;
+            var spettacoli = db.Associazionis.OrderBy(s=>s.Spettacolo).Where(r => r.IdUtente == uid);
+            ViewBag.Spettacoli = spettacoli;
+            var service = new ServizioPrevendita.ServizioPrevendita();
+            var eventi = service.RecuperaEventiMailticket();
+            return View(eventi.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult EventiPv(string uid, string cerca)
+        {
+            var utente = UserManager.Users.Where(u => u.Id == uid);
+            ViewBag.Title = "Eventi assegnati";
+            ViewBag.Message = utente;
+            var service = new ServizioPrevendita.ServizioPrevendita();
+            var eventi = service.RecuperaEventiMailticket();
+            if (string.IsNullOrEmpty(cerca))
+            {
+                var spettacoli = db.Associazionis.OrderBy(s=>s.Spettacolo).ThenBy(s=>s.IdEvento).Where(r => r.IdUtente == uid);
+                ViewBag.Spettacoli = spettacoli;
+            }
+            else
+            {
+                var spettacoli = db.Associazionis.OrderBy(s => s.Spettacolo).ThenBy(s => s.IdEvento).Where(r => r.IdUtente == uid & r.Spettacolo.Contains(cerca.ToUpper()));
+                ViewBag.Spettacoli = spettacoli;
+            }
+            return View(eventi.ToList());
+        }
+
+        public ActionResult DeleteAss(int? id, string uid, string data)
+        {
+            var utente = UserManager.Users.Where(u => u.Id == uid);
+            ViewBag.Title = "Rimuovi evento";
+            ViewBag.Message = utente;
+            Associazione associazione = db.Associazionis.Find(id);
+            return View(associazione);
+        }
+
+        [HttpPost, ActionName("DeleteAss")]
+        public ActionResult DeleteAssConfirmed(int id)
+        {
+            Associazione associazione = db.Associazionis.Find(id);
+            db.Associazionis.Remove(associazione);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

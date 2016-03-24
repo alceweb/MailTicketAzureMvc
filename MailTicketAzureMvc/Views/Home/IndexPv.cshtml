@@ -1,7 +1,43 @@
-﻿
-@{
-    ViewBag.Title = "IndexPv";
+﻿@model IEnumerable<MailTicketAzureMvc.ServizioPrevendita.EventoMail>
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." name="cerca" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        @foreach (var items in ViewBag.Spettacoli)
+        {
+            foreach (var item in Model.Where(s => s.idMan == items.IdMan & s.idEvento == items.IdEvento))
+            {
+                <div class="col-sm-6 col-md-4 text-center">
+                    <div class="thumbnail">
+                        <h3>@Html.DisplayFor(modelItem => item.Spettacolo)</h3>
+                        <img src="~/Content/Images/demo.jpg" />
+                        <div class="caption">
+                            <h4>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </h4>
+                            <h5><em>@Html.DisplayFor(modelItem => item.Dataevento)</em></h5>
+                        </div>
+                        <input id="Button1" type="button" class="btn btn-primary" value="Aggiungi al carrello" />
+                    </div><br />
+                </div>
+            }
+
+        }
+    </div>
 }
-
-<h2>Home punto vendita</h2>
-

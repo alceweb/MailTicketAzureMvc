@@ -5,6 +5,13 @@
 }
 
 <h2>test</h2>
+<h2>@ViewBag.Message</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" name="save" value="Save" />
+    <input type="submit" name="cancel" value="Cancel" />
+}
 @foreach (var items in ViewBag.Spettacoli)
 {<hr />
     @items.IdMan    <span>-</span> @items.IdEvento

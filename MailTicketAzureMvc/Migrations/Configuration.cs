@@ -10,7 +10,6 @@ namespace MailTicketAzureMvc.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "MailTicketAzureMvc.Models.ApplicationDbContext";
         }
 
         protected override void Seed(MailTicketAzureMvc.Models.ApplicationDbContext context)

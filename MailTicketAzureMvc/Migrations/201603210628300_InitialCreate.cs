@@ -8,6 +8,20 @@ namespace MailTicketAzureMvc.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Associaziones",
+                c => new
+                    {
+                        Id_Associazione = c.Int(nullable: false, identity: true),
+                        IdUtente = c.String(),
+                        IdMan = c.String(),
+                        IdSpettacolo = c.String(),
+                        IdEvento = c.String(),
+                        IdSpettMail = c.String(),
+                        Spettacolo = c.String(),
+                    })
+                .PrimaryKey(t => t.Id_Associazione);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -99,6 +113,7 @@ namespace MailTicketAzureMvc.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Associaziones");
         }
     }
 }
