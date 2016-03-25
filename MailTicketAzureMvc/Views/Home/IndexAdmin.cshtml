@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MailTicketAzureMvc.Models.Associazione>
+﻿@model IEnumerable<MailTicketAzureMvc.ServizioPrevendita.EventoMail>
 
 <h2>@ViewBag.Title</h2>
 @using (Html.BeginForm())
@@ -48,10 +48,6 @@
                    <div class="collapse" id="@cod">
                        <div class="well">
                            <p><strong><em>Questo evento è assegnato a:</em></strong></p>
-                           @foreach (var item in Model.Where(u=>u.IdMan == items.idMan & u.IdEvento == items.idEvento))
-                           {
-                                       @item.IdUtente<br/>
-                           }
                        </div>
                    </div>
                </td>

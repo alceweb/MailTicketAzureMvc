@@ -45,9 +45,7 @@ namespace MailTicketAzureMvc.Controllers
                 var pv = db.Associazionis.Where(u => u.IdMan == man & u.IdEvento == eve);
                 ViewBag.Pv = pv;
             }
-            var puntiVendita = db.Associazionis;
-            ViewBag.PuntiVendita = puntiVendita;
-            return View(puntiVendita.ToList());
+            return View(eventi.ToList());
         }
 
         [HttpPost]
