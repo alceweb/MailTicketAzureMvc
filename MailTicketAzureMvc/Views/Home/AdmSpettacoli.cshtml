@@ -2,15 +2,16 @@
 <h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapseExample">Assegna spettacolo <span class="badge">@ViewBag.EventiTot eventi</span></button>
 </h3>
+<span class="btn-danger">@ViewBag.Ko</span>
     @using (Html.BeginForm())
     {
         <div class="collapse" id="collapse1">
             <div class="well">
                 <div class="row">
-                    <div class="col col-sm-6">
+                    <div class="col col-sm-2">
                         @Html.DropDownList("IdUtente", null, "Scegli l'insegna", htmlAttributes: new { @class = "form-control" })
                     </div>
-                    <div class="col col-sm-6">
+                    <div class="col col-sm-2">
                         <input id="Button1" type="submit" value="Assegna" class="btn btn-success" />
 
                     </div>

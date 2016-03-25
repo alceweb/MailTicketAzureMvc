@@ -34,11 +34,20 @@ namespace MailTicketAzureMvc.Controllers
             var service = new ServizioPrevendita.ServizioPrevendita();
             ViewBag.Title = "Lista eventi";
             ViewBag.Message = "Eventi";
-                var eventi = service.RecuperaEventiMailticket()
-                    .OrderBy(r => r.idMan).ThenBy(r => r.idEvento);
-                ViewBag.Eventi = eventi;
-                ViewBag.EventiTot = eventi.Count();
-            return View();
+            //Estraggo tutti gli eventi dal WS
+            var eventi = service.RecuperaEventiMailticket().OrderBy(r => r.idMan).ThenBy(r => r.idEvento);
+            ViewBag.EventiTot = eventi.Count();
+            ViewBag.Eventi = eventi;
+            foreach (var item in ViewBag.Eventi)
+            {
+                string man = item.idMan;
+                string eve = item.idEvento;
+                var pv = db.Associazionis.Where(u => u.IdMan == man & u.IdEvento == eve);
+                ViewBag.Pv = pv;
+            }
+            var puntiVendita = db.Associazionis;
+            ViewBag.PuntiVendita = puntiVendita;
+            return View(puntiVendita.ToList());
         }
 
         [HttpPost]
@@ -50,6 +59,7 @@ namespace MailTicketAzureMvc.Controllers
             var eventi = service.RecuperaEventiMailticket()
                 .OrderBy(r => r.idMan).ThenBy(r => r.idEvento).Where(r=>r.idMan.Contains(cerca.ToUpper()) | r.Spettacolo.Contains(cerca.ToUpper()));
             ViewBag.Eventi = eventi;
+            var pv = db.Associazionis;
             ViewBag.EventiTot = eventi.Count();
             return View();
         }
@@ -122,17 +132,16 @@ namespace MailTicketAzureMvc.Controllers
         }
         public ActionResult AdmEventi(string man, string spe, string eve)
         {
-            ViewData["ut"] = db.Users.ToList();
-            ViewBag.IdUtente = new SelectList(db.Users, "Id", "Insegna");
             var service = new ServizioPrevendita.ServizioPrevendita();
+            ViewBag.Title = "Admin eventi";
+            ViewBag.Message = "idEvento " + eve;
+            ViewBag.IdUtente = new SelectList(db.Users, "Id", "Insegna");
             if (eve == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             ViewBag.Service = service.RecuperaEventiMailticket().Length;
-            ViewBag.Title = "Admin eventi";
-            ViewBag.Message = "idEvento " + eve;
             var eventi = service.RecuperaEventiMailticket()
                 .OrderBy(r => r.idMan).Where(r => r.idEvento == eve & r.idMan == man);
             ViewBag.Eventi = eventi;
@@ -142,41 +151,48 @@ namespace MailTicketAzureMvc.Controllers
         [HttpPost]
         public ActionResult AdmEventi([Bind(Include = "idUtente,Idman,IdEvento,IdSpettMail,Spettacolo")] Associazione associazione)
         {
+            ViewBag.IdUtente = new SelectList(db.Users, "Id", "Insegna");
             var utente = Request["IdUtente"];
             var man = Request["man"];
             var spe = Request["spe"];
             var eve = Request["eve"];
-            var verifica = db.Associazionis.Where(u => u.IdUtente == utente & u.IdMan == man & u.Spettacolo == spe & u.IdEvento == eve);
-            if (verifica.Count() == 0)
+            ViewBag.Title = "Admin eventi";
+            var service = new ServizioPrevendita.ServizioPrevendita();
+            var eventi = service.RecuperaEventiMailticket().Where(r => r.idMan == man & r.Spettacolo == spe & r.idEvento == eve);
+            ViewBag.Eventi = eventi;
+            if (!string.IsNullOrEmpty(utente))
             {
-                var service = new ServizioPrevendita.ServizioPrevendita();
-                var eventi = service.RecuperaEventiMailticket().Where(r => r.idMan == man & r.Spettacolo == spe & r.idEvento == eve);
-                ViewBag.Eventi = eventi;
                 ViewBag.Eventis = eventi;
                 foreach (var item in ViewBag.Eventis)
                 {
                     if (ModelState.IsValid)
                     {
-                        associazione.IdEvento = item.idEvento;
-                        associazione.IdMan = item.idMan;
-                        associazione.IdSpettacolo = item.idSpettacolo;
-                        associazione.IdSpettMail = item.idSpettMail;
-                        associazione.Spettacolo = item.Spettacolo;
-                        db.Associazionis.Add(associazione);
-                        db.SaveChanges();
+                        //verifico se il singolo evento è già assegnato
+                        var verifica = db.Associazionis.Where(u => u.IdUtente == utente & u.IdMan == man & u.Spettacolo == spe & u.IdEvento == eve);
+                        if (verifica.Count() == 0)
+                        {
+                                    associazione.IdEvento = item.idEvento;
+                                    associazione.IdMan = item.idMan;
+                                    associazione.IdSpettacolo = item.idSpettacolo;
+                                    associazione.IdSpettMail = item.idSpettMail;
+                                    associazione.Spettacolo = item.Spettacolo;
+                                    db.Associazionis.Add(associazione);
+                                    db.SaveChanges();
+                        }
                     }
                 }
-                return RedirectToAction("AssegnaManOk");
             }
             else
             {
-                return RedirectToAction("AssegnaManKo");
-
+                ViewBag.Ko = "non hai selezionato l'insegna!";
+                return View();
             }
+            return RedirectToAction("AssegnaEveOk");
         }
         public ActionResult AdmSpettacoli(string man, string spe)
         {
-            ViewData["ut"] = db.Users.ToList();
+            ViewBag.Title = "Admin spettacoli";
+            ViewBag.Message = spe;
             ViewBag.IdUtente = new SelectList(db.Users, "Id", "Insegna");
             var service = new ServizioPrevendita.ServizioPrevendita();
             if (spe == null)
@@ -184,8 +200,6 @@ namespace MailTicketAzureMvc.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ViewBag.Service = service.RecuperaEventiMailticket().Length;
-            ViewBag.Title = "Admin spettacoli";
-            ViewBag.Message = spe;
             var eventi = service.RecuperaEventiMailticket()
                 .OrderBy(r => r.idMan).Where(r => r.Spettacolo == spe);
             ViewBag.Eventi = eventi;
@@ -195,40 +209,52 @@ namespace MailTicketAzureMvc.Controllers
         [HttpPost]
         public ActionResult AdmSpettacoli([Bind(Include = "idUtente,Idman,IdEvento,IdSpettMail,Spettacolo")] Associazione associazione)
         {
+            ViewBag.Title = "Admin spettacoli";
+            ViewBag.IdUtente = new SelectList(db.Users, "Id", "Insegna");
             var utente = Request["IdUtente"];
             var man = Request["man"];
             var spe = Request["spe"];
             var service = new ServizioPrevendita.ServizioPrevendita();
             var eventi = service.RecuperaEventiMailticket().Where(r => r.Spettacolo == Request["spe"]);
             ViewBag.Eventi = eventi;
-            ViewBag.Eventis = eventi;
-            foreach (var item in ViewBag.Eventis)
+            if (!string.IsNullOrEmpty(utente))
             {
-                if (ModelState.IsValid)
+                ViewBag.Eventis = eventi;
+                foreach (var item in ViewBag.Eventis)
                 {
-                //verifico se il singolo evento è già assegnato
-                    string verificaEv = item.idEvento;
-                    string verificaMan = item.idMan;
-                    var verifica = db.Associazionis.Where(e => e.IdUtente == utente & e.IdMan == verificaMan & e.Spettacolo == spe & e.IdEvento == verificaEv).Count();
-                    if (verifica == 0)
-                    //se non è assegnato inserisco i record
+                    if (ModelState.IsValid)
                     {
-                    associazione.IdEvento = item.idEvento;
-                        associazione.IdMan = item.idMan;
-                        associazione.IdSpettacolo = item.idSpettacolo;
-                        associazione.IdSpettMail = item.idSpettMail;
-                        associazione.Spettacolo = item.Spettacolo;
-                        db.Associazionis.Add(associazione);
-                        db.SaveChanges();
+                    //verifico se il singolo evento è già assegnato
+                        string verificaEv = item.idEvento;
+                        string verificaMan = item.idMan;
+                        var verifica = db.Associazionis.Where(e => e.IdUtente == utente & e.IdMan == verificaMan & e.Spettacolo == spe & e.IdEvento == verificaEv).Count();
+                        if (verifica == 0)
+                        //se non è assegnato inserisco i record
+                        {
+                        associazione.IdEvento = item.idEvento;
+                            associazione.IdMan = item.idMan;
+                            associazione.IdSpettacolo = item.idSpettacolo;
+                            associazione.IdSpettMail = item.idSpettMail;
+                            associazione.Spettacolo = item.Spettacolo;
+                            db.Associazionis.Add(associazione);
+                            db.SaveChanges();
+                        }
                     }
-                }
+                 }
+
+             }
+            else
+            {
+                ViewBag.Ko = "non hai selezionato l'insegna!";
+                return View();
             }
-            return RedirectToAction("AssegnaManOk");
+
+            return RedirectToAction("AssegnaSpeOk");
     }
 
         public ActionResult AdmManifestazioni(string man)
         {
-            ViewData["ut"] = db.Users.ToList();
+            ViewBag.Title = "Admin manifestazioni";
             ViewBag.IdUtente = new SelectList(db.Users, "Id", "Insegna");
             var utente = Request["IdUtente"];
             var service = new ServizioPrevendita.ServizioPrevendita();
@@ -238,7 +264,6 @@ namespace MailTicketAzureMvc.Controllers
             }
 
             ViewBag.Service = service.RecuperaEventiMailticket().Length;
-            ViewBag.Title = "Admin manifestazioni";
             ViewBag.Message = man;
             var eventi = service.RecuperaEventiMailticket()
                 .OrderBy(r => r.Spettacolo).Where(r => r.idMan == man);
@@ -250,13 +275,12 @@ namespace MailTicketAzureMvc.Controllers
         [HttpPost]
         public ActionResult AdmManifestazioni([Bind(Include = "idUtente,Idman,IdEvento,IdSpettMail,Spettacolo")] Associazione associazione)
         {
-            ViewData["ut"] = db.Users.ToList();
-            ViewBag.IdUtente = new SelectList(db.Users, "Id", "Insegna");
-            ViewBag.Title = "Admin manifestazioni";
-            var man = Request["man"];
             var utente = Request["IdUtente"];
+            var man = Request["man"];
             var service = new ServizioPrevendita.ServizioPrevendita();
+            ViewBag.Title = "Admin manifestazioni";
             ViewBag.Message = man;
+           ViewBag.IdUtente = new SelectList(db.Users, "Id", "Insegna");
             var eventi = service.RecuperaEventiMailticket().Where(r => r.idMan == man);
             ViewBag.Eventi = eventi;
             ViewBag.EventiTot = eventi.Count();
@@ -312,12 +336,21 @@ namespace MailTicketAzureMvc.Controllers
         {
             return View();
         }
+        public ActionResult AssegnaSpeOk()
+        {
+            return View();
+        }
+        public ActionResult AssegnaEveOk()
+        {
+            return View();
+        }
         public ActionResult test()
         {
-            var utente = User.Identity.GetUserId();
-            var spettacoli = db.Associazionis.Where(r => r.IdUtente == utente);
+            var spettacoli = db.Associazionis.OrderBy(s => s.Spettacolo);
             ViewBag.Spettacoli = spettacoli;
-            return View();
+            var service = new ServizioPrevendita.ServizioPrevendita();
+            var eventi = service.RecuperaEventiMailticket();
+            return View(eventi.ToList());
         }
 
         [HttpPost]

@@ -18,26 +18,16 @@
     </div>
 </div>
 
-@using (Html.BeginForm())
-{
-    <input type="submit" name="save" value="Save" />
-    <input type="submit" name="cancel" value="Cancel" />
-}
 @foreach (var items in ViewBag.Spettacoli)
-{<hr />
-    @items.IdMan    <span>-</span> @items.IdEvento
-<hr />
-    foreach (var item in Model.Where(s=>s.idMan==items.IdMan & s.idEvento == items.IdEvento))
+{
+    @items.Spettacolo <br/>
+    foreach (var item in Model.OrderBy(s => s.Spettacolo).Where(s=>s.idMan == items.IdMan))
     {
-        <strong>
-            <span>@Html.DisplayFor(modelItem => item.idMan) -</span>
-            <span>@Html.DisplayFor(modelItem => item.idEvento) -</span>
-        </strong>
-        <span>@Html.DisplayFor(modelItem => item.Spettacolo) -</span>
-        <span>@Html.DisplayFor(modelItem => item.Dataevento) -</span>
-        <span>@Html.DisplayFor(modelItem => item.Location) -</span>
-        <br />
+        <tr>
+            <td>@item.Spettacolo</td>
+            <td>@item.Spettacolo</td>
+            <td>@item.idMan</td>
+        </tr>
+
     }
-
 }
-

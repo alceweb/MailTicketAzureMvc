@@ -266,6 +266,8 @@
     <Content Include="Views\Home\IndexPv.cshtml" />
     <Content Include="Views\UsersAdmin\EventiPv.cshtml" />
     <Content Include="Views\UsersAdmin\DeleteAss.cshtml" />
+    <Content Include="Views\Home\AssegnaSpeOk.cshtml" />
+    <Content Include="Views\Home\AssegnaEveOk.cshtml" />
     <None Include="Web References\ServizioPrevendita\servizioprevendita.disco" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
