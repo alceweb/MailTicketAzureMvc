@@ -1,6 +1,6 @@
 ﻿@model MailTicketAzureMvc.Models.IndexViewModel
 @{
-    ViewBag.Title = "Gestisci";
+    ViewBag.Title = "Il tuo profilo";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -28,6 +28,11 @@
             @Model.Logins.Count [
             @Html.ActionLink("Gestisci", "ManageLogins") ]
         </dd>
+        <dt>Modifica Email di riferimento</dt>
+        <dd>
+            @Html.ActionLink("Modifica Email", "IndexPro")
+        </dd>
+
         @*
             I numeri di telefono possono essere usati come secondo fattore di verifica in un sistema di autenticazione a due fattori.
              
@@ -56,32 +61,32 @@
                 }
             </dd>
         *@
-        <dt>Autenticazione a due fattori:</dt>
-        <dd>
-            <p>
-                Non sono configurati provider di autenticazione a due fattori. Vedere <a href="http://go.microsoft.com/fwlink/?LinkId=403804">questo articolo</a>
-                per informazioni su come configurare l'applicazione ASP.NET per il supporto dell'autenticazione a due fattori.
-            </p>
-            @*@if (Model.TwoFactor)
+        @*<dt>Autenticazione a due fattori:</dt>
+    <dd>
+        <p>
+            Non sono configurati provider di autenticazione a due fattori. Vedere <a href="http://go.microsoft.com/fwlink/?LinkId=403804">questo articolo</a>
+            per informazioni su come configurare l'applicazione ASP.NET per il supporto dell'autenticazione a due fattori.
+        </p>
+        @if (Model.TwoFactor)
+            {
+                using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Abilitata
-                        <input type="submit" value="Disabilita" class="btn btn-link" />
-                        </text>
-                    }
+                    @Html.AntiForgeryToken()
+                    <text>Abilitata
+                    <input type="submit" value="Disabilita" class="btn btn-link" />
+                    </text>
                 }
-                else
+            }
+            else
+            {
+                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Disabilitata
-                        <input type="submit" value="Abilita" class="btn btn-link" />
-                        </text>
-                    }
-                }*@
+                    @Html.AntiForgeryToken()
+                    <text>Disabilitata
+                    <input type="submit" value="Abilita" class="btn btn-link" />
+                    </text>
+                }
+            }*@
         </dd>
     </dl>
 </div>
